@@ -6,3 +6,5 @@ output
 /old_sinnoh_cube.xlsx
 /assets/card_generator/emblems/vanilla.png
 .tts/
+wonder_trade_server/pokemon/[0-9].txt
+wonder_trade_server/pokemon/popped.txt

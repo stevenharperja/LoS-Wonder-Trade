@@ -1,7 +1,7 @@
 from http.server import *
 import os
 import random
-
+import sys
 
 class GFG(BaseHTTPRequestHandler): 
     filepath = os.path.dirname(os.path.abspath(__file__))
@@ -63,7 +63,7 @@ class GFG(BaseHTTPRequestHandler):
 # this is the object which take port  
 # number and the server-name 
 # for running the server 
-port = HTTPServer(('', 80), GFG) 
+port = HTTPServer(('', int(sys.argv[1])), GFG) 
 
 def initialize_pokemon():
     #fill in the pokemon files if they don't exist

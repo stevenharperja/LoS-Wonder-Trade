@@ -2,12 +2,12 @@
   "GUID": "078510",
   "Name": "Custom_Tile",
   "Transform": {
-    "posX": -0.00400329754,
-    "posY": 0.200000569,
-    "posZ": 0.5334316,
-    "rotX": -7.502171E-06,
-    "rotY": 359.982544,
-    "rotZ": 4.05432814E-07,
+    "posX": -0.0040035923,
+    "posY": 0.200000361,
+    "posZ": 0.533431649,
+    "rotX": -4.389076E-07,
+    "rotY": 359.982574,
+    "rotZ": -1.52969733E-07,
     "scaleX": 0.8,
     "scaleY": 1.0,
     "scaleZ": 0.8
@@ -22,8 +22,8 @@
   },
   "ColorDiffuse": {
     "r": 0.5882353,
-    "g": 0.294082,
-    "b": 0.1960446
+    "g": 0.294081956,
+    "b": 0.196044564
   },
   "Tags": [
     "Ball Token"
@@ -58,175 +58,15 @@
   "LuaScriptState": "",
   "XmlUI": ""
 }|{
-  "GUID": "e053ed",
-  "Name": "Card",
-  "Transform": {
-    "posX": -0.006051961,
-    "posY": 0.261734784,
-    "posZ": -0.336067528,
-    "rotX": 359.954163,
-    "rotY": 359.969666,
-    "rotZ": 180.004547,
-    "scaleX": 1.5,
-    "scaleY": 1.0,
-    "scaleZ": 1.5
-  },
-  "Nickname": "Litwick",
-  "Description": "The Candle Pokémon",
-  "GMNotes": "",
-  "AltLookAngle": {
-    "x": 0.0,
-    "y": 0.0,
-    "z": 0.0
-  },
-  "ColorDiffuse": {
-    "r": 0.6,
-    "g": 0.299997568,
-    "b": 0.199997663
-  },
-  "Tags": [
-    "Cold",
-    "Forest",
-    "Pokemon Card",
-    "Starter Card"
-  ],
-  "LayoutGroupSortIndex": 139,
-  "Value": 0,
-  "Locked": false,
-  "Grid": false,
-  "Snap": true,
-  "IgnoreFoW": false,
-  "MeasureMovement": false,
-  "DragSelectable": true,
-  "Autoraise": true,
-  "Sticky": true,
-  "Tooltip": true,
-  "GridProjection": false,
-  "HideWhenFaceDown": true,
-  "Hands": false,
-  "CardID": 512,
-  "SidewaysCard": false,
-  "CustomDeck": {
-    "5": {
-      "FaceURL": "https://steamusercontent-a.akamaihd.net/ugc/1906739392565043970/A09ECD50015B5B821AB18FC0350EEA7B6CDFE206/",
-      "BackURL": "https://steamusercontent-a.akamaihd.net/ugc/1906739392565044136/08BA55A7909025083E8DEA8677E45CED65665728/",
-      "NumWidth": 10,
-      "NumHeight": 7,
-      "BackIsHidden": true,
-      "UniqueBack": true,
-      "Type": 0
-    }
-  },
-  "LuaScript": "pokedex_name = \"Litwick\"\ninternal_name = \"Litwick\"\nhealth = 5\ninitiative = 5\ntypes = {\"Ghost\",\"Fire\"}\nmoves = {\"Ghost\",\"Fire\",\"Psychic\",\"Grass\"}\nevolve_into = {\"Lampent\"}\nevolve_cost = 4\nencounter_tier = \"Starter\"\nmove_name = \"Will-O-Wisp\"\nmove_type = \"Fire\"\nmove_attack_strength = \"1\"\nmove_effect = \"Inflict the Burned status on the target. If the target is already Burned, attack strength is increased to 3.\"",
-  "LuaScriptState": "",
-  "XmlUI": "",
-  "AttachedSnapPoints": [
-    {
-      "Position": {
-        "x": 0.6,
-        "y": -0.2,
-        "z": 0.05
-      },
-      "Rotation": {
-        "x": 0.0,
-        "y": 0.0,
-        "z": 0.0
-      },
-      "Tags": [
-        "Held Item"
-      ]
-    }
-  ]
-}|{
-  "GUID": "7642f5",
-  "Name": "Card",
-  "Transform": {
-    "posX": -0.005851644,
-    "posY": 0.213772476,
-    "posZ": -0.102452151,
-    "rotX": -0.000424297439,
-    "rotY": 359.962433,
-    "rotZ": 179.991974,
-    "scaleX": 1.5,
-    "scaleY": 1.0,
-    "scaleZ": 1.5
-  },
-  "Nickname": "Litwick",
-  "Description": "The Candle Pokémon",
-  "GMNotes": "",
-  "AltLookAngle": {
-    "x": 0.0,
-    "y": 0.0,
-    "z": 0.0
-  },
-  "ColorDiffuse": {
-    "r": 0.6,
-    "g": 0.2999976,
-    "b": 0.1999977
-  },
-  "Tags": [
-    "Cold",
-    "Forest",
-    "Pokemon Card",
-    "Starter Card"
-  ],
-  "LayoutGroupSortIndex": 139,
-  "Value": 0,
-  "Locked": false,
-  "Grid": false,
-  "Snap": true,
-  "IgnoreFoW": false,
-  "MeasureMovement": false,
-  "DragSelectable": true,
-  "Autoraise": true,
-  "Sticky": true,
-  "Tooltip": true,
-  "GridProjection": false,
-  "HideWhenFaceDown": true,
-  "Hands": false,
-  "CardID": 512,
-  "SidewaysCard": false,
-  "CustomDeck": {
-    "5": {
-      "FaceURL": "https://steamusercontent-a.akamaihd.net/ugc/1906739392565043970/A09ECD50015B5B821AB18FC0350EEA7B6CDFE206/",
-      "BackURL": "https://steamusercontent-a.akamaihd.net/ugc/1906739392565044136/08BA55A7909025083E8DEA8677E45CED65665728/",
-      "NumWidth": 10,
-      "NumHeight": 7,
-      "BackIsHidden": true,
-      "UniqueBack": true,
-      "Type": 0
-    }
-  },
-  "LuaScript": "pokedex_name = \"Litwick\"\ninternal_name = \"Litwick\"\nhealth = 5\ninitiative = 5\ntypes = {\"Ghost\",\"Fire\"}\nmoves = {\"Ghost\",\"Fire\",\"Psychic\",\"Grass\"}\nevolve_into = {\"Lampent\"}\nevolve_cost = 4\nencounter_tier = \"Starter\"\nmove_name = \"Will-O-Wisp\"\nmove_type = \"Fire\"\nmove_attack_strength = \"1\"\nmove_effect = \"Inflict the Burned status on the target. If the target is already Burned, attack strength is increased to 3.\"",
-  "LuaScriptState": "",
-  "XmlUI": "",
-  "AttachedSnapPoints": [
-    {
-      "Position": {
-        "x": 0.6,
-        "y": -0.2,
-        "z": 0.05
-      },
-      "Rotation": {
-        "x": 0.0,
-        "y": 0.0,
-        "z": 0.0
-      },
-      "Tags": [
-        "Held Item"
-      ]
-    }
-  ]
-}|{
   "GUID": "73c852",
   "Name": "Card",
   "Transform": {
-    "posX": -0.00610691728,
-    "posY": 0.287812561,
-    "posZ": -0.573042333,
-    "rotX": 359.943665,
-    "rotY": 359.982483,
-    "rotZ": 0.009097828,
+    "posX": -0.006114334,
+    "posY": 0.2136052,
+    "posZ": -0.5730282,
+    "rotX": 3.16751539E-07,
+    "rotY": 0.011027568,
+    "rotZ": -4.656613E-08,
     "scaleX": 1.5,
     "scaleY": 1.0,
     "scaleZ": 1.5
@@ -241,8 +81,8 @@
   },
   "ColorDiffuse": {
     "r": 0.6,
-    "g": 0.299997568,
-    "b": 0.199997663
+    "g": 0.299997538,
+    "b": 0.199997634
   },
   "Tags": [
     "Cold",
