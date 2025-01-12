@@ -2,7 +2,8 @@
 #include utils
 
 local pokemon_zone = getObjectFromGUID(pokemon_zone_guid)
-local GTS_address = "localhost:5555"
+local GTS_address = "https://shweshipu.pythonanywhere.com/"
+-- broadcastToAll("ip is " .. GTS_address)
 
 
 local send_json = ""
@@ -219,3 +220,4 @@ function delete_pokemon()
     object.destruct()
   end
 end
+
