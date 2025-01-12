@@ -1,0 +1,221 @@
+#include config
+#include utils
+
+local pokemon_zone = getObjectFromGUID(pokemon_zone_guid)
+local GTS_address = "localhost:5555"
+
+
+local send_json = ""
+local received_json = ""
+
+in_progress = false
+
+function onLoad()
+    button_params = {
+        function_owner = self,
+        scale          = {0.5, 1, 0.5},
+        width          = 450,
+        height         = 180,
+        font_size      = 60,
+        font_color     = config.colours.Black
+      }
+      -- Send Button
+      button_params.click_function = "send_to_gts"
+      button_params.position = {0, 0.2, 0.86}
+      self:createButton(button_params)
+      send_json = ""
+      received_json = ""
+      in_progress = false
+
+  update_panel()
+end
+--
+function update_zone()
+    -- local direction = math.cos(math.rad(self:getRotation().y))
+    local offset = Vector(-0.02, 0.24, -0.71)
+    -- broadcastToAll(self.getScale().x, {0, 1, 0})
+    offset.x = offset.x / self.getScale().x
+    offset.y = offset.y / self.getScale().y
+    offset.z = offset.z / self.getScale().z
+
+    pokemon_zone:setPosition(self:positionToWorld(offset))
+    pokemon_zone:setRotation(self:getRotation() + Vector(0, 180, 0))
+end
+
+function onObjectDrop(player, object)
+  if object == self then
+    Wait.time(update_zone, 1)
+  end
+end
+--
+
+function update_panel()
+  function update_panel_coroutine()
+    coroutine.yield(0)
+    local objects = pokemon_zone:getObjects()
+    if len(objects) > 1 then
+    --   broadcastToAll("Updating Wonder Panel...", {0, 1, 0})
+    --   broadcastToAll("Found " .. len(objects) .. " objects in the Pokemon Zone", {0, 1, 0})
+      for _, object in ipairs(objects) do
+        -- broadcastToAll(object.getJSON(), {0, 1, 0})
+        -- if object then
+        --     object.highlightOn('Red')
+        -- end
+      end
+      self.editButton({index=0, label="Wonder Trade", width=450, height=180})
+    else
+        -- broadcastToAll("one or less objects found in the Pokemon Zone", {0, 1, 0})
+        self.editButton({index=0, label="", width=0, height=0})
+    end
+
+    return 1
+  end
+  startLuaCoroutine(self, "update_panel_coroutine")
+end
+
+
+function send_to_gts()
+  if in_progress then
+    broadcastToAll("Wait for the current trade to end", {1, 0, 0})
+    return
+  end
+  broadcastToAll("Sending to GTS...", {0, 1, 0})
+  local objects = pokemon_zone.getObjects()
+  local json = ""
+    for _, object in ipairs(objects) do
+        local tempRot = object.getRotation()
+        local tempPos = object.getPosition()
+        object:setRotation(object.getRotation() - self.getRotation())
+        object:setPosition(self.positionToLocal(object.getPosition()))
+        json = json .. object.getJSON() .. "|" 
+        object:setPosition(tempPos)
+        object:setRotation(tempRot)
+
+    end
+    json = json:sub(0, -2) .. ""
+    -- broadcastToAll(json, {0, 1, 0})
+    send_json = json
+    put_json()
+end
+
+function put_json() 
+    
+    -- Check connection, put wont work so I have to do a get first
+    in_progress = true
+    WebRequest.get(GTS_address, function(request)
+        if request.is_error then
+            broadcastToAll(request.error, {1, 0, 0})
+            in_progress = false
+        else
+          WebRequest.put(GTS_address,send_json, function() 
+            delete_pokemon()
+            create_pokemon()
+            end)
+        end
+    end)
+    
+end
+
+function get_json_position(json)
+  -- Extract each component individually
+  local posX = json:match('"posX"%s*:%s*([%d%-%.eE]+)')
+  local posY = json:match('"posY"%s*:%s*([%d%-%.eE]+)')
+  local posZ = json:match('"posZ"%s*:%s*([%d%-%.eE]+)')
+
+  -- Validate the extracted values
+  if not (posX and posY and posZ) then
+      broadcastToAll("Invalid JSON: Could not extract all position values.", {1, 0, 0})
+      return nil
+  end
+
+  -- Convert to numbers
+  local x = tonumber(posX)
+  local y = tonumber(posY)
+  local z = tonumber(posZ)
+
+  -- Validate numeric conversion
+  if not (x and y and z) then
+      broadcastToAll("Failed to parse position values into numbers!", {1, 0, 0})
+      return nil
+  end
+
+  -- Debug output
+  -- broadcastToAll("Parsed Position: " .. x .. " " .. y .. " " .. z, {0, 1, 0})
+
+  -- Create and return the Vector
+  local pos = Vector(x, y, z)
+  return pos
+end
+
+function get_json_rotation(json)
+  -- Extract each component individually
+  local rotX = json:match('"rotX"%s*:%s*([%d%-%.eE]+)')
+  local rotY = json:match('"rotY"%s*:%s*([%d%-%.eE]+)')
+  local rotZ = json:match('"rotZ"%s*:%s*([%d%-%.eE]+)')
+
+  -- Validate the extracted values
+  if not (rotX and rotY and rotZ) then
+      broadcastToAll("Invalid JSON: Could not extract all rotation values.", {1, 0, 0})
+      return nil
+  end
+
+  -- Convert to numbers
+  local x = tonumber(rotX)
+  local y = tonumber(rotY)
+  local z = tonumber(rotZ)
+
+  -- Validate numeric conversion
+  if not (x and y and z) then
+      broadcastToAll("Failed to parse rotation values into numbers!", {1, 0, 0})
+      return nil
+  end
+
+  -- Debug output
+  -- broadcastToAll("Parsed Rotation: " .. x .. " " .. y .. " " .. z, {0, 1, 0})
+
+  -- Create and return the Vector
+  local rot = Vector(x, y, z)
+  return rot
+end
+
+function get_json()
+    WebRequest.get(GTS_address, function(request)
+        if request.is_error then
+            broadcastToAll(request.error, {1, 0, 0})
+        else
+            -- broadcastToAll("Received JSON successfully")
+            -- broadcastToAll(request.text)
+            received_json = request.text
+            if received_json then
+              for piece in string.gmatch(received_json, "([^|]+)") do
+                if piece then
+                  table.insert(json_pieces, piece)
+                end
+              end
+              for _, piece in ipairs(json_pieces) do
+                  -- broadcastToAll(piece, {0, 1, 0})
+                  local obj_pos = get_json_position(piece)
+                  obj_pos = self.positionToWorld(obj_pos)
+                  local obj_rot = get_json_rotation(piece)
+                  obj_rot = obj_rot + self.getRotation()
+                  local obj = spawnObjectJSON({json=piece, position=obj_pos, rotation=obj_rot})
+              end
+            end
+        end
+        in_progress = false
+    end)
+end
+
+function create_pokemon()
+--   broadcastToAll("Creating Pokemon...", {0, 1, 0})
+  json_pieces = {}
+  get_json()
+end
+
+function delete_pokemon()
+--   broadcastToAll("Deleting Pokemon...", {0, 1, 0})
+  local objects = pokemon_zone.getObjects()
+  for _, object in ipairs(objects) do
+    object.destruct()
+  end
+end
