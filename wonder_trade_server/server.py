@@ -63,7 +63,7 @@ class GFG(BaseHTTPRequestHandler):
 # this is the object which take port  
 # number and the server-name 
 # for running the server 
-port = HTTPServer(('', 5555), GFG) 
+port = HTTPServer(('', 80), GFG) 
 
 def initialize_pokemon():
     #fill in the pokemon files if they don't exist
